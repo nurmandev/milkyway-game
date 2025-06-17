@@ -23,15 +23,16 @@ const Header = ({ user }) => {
             {/* <Connector className=" w-[60%] h-auto absolute -bottom-[.5vw] left-1/2 transform -translate-x-1/2 z-[2]" /> */}
           </div>
         </div>
-        <div className=" border">
-          <div className=" coin relative w-[3vw] h-[3vw]">
+        <div className="mt-2 flex items-center bg-yellow-900 text-yellow-300 px-2 rounded-full">
+          <div className="relative w-[2vw] h-[3vw] min-w-[30px] min-h-[30px] mr-2">
             <Image
-              src={"/coin.png"}
+              src="/coin.png"
               alt="coin"
               fill
-              className=" w-full h-full"
+              className="w-full h-full object-contain"
             />
           </div>
+          <span className="text-xl font-semibold">1265.55</span>
         </div>
       </div>
 
