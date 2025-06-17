@@ -23,8 +23,8 @@ const Header = ({ user }) => {
             {/* <Connector className=" w-[60%] h-auto absolute -bottom-[.5vw] left-1/2 transform -translate-x-1/2 z-[2]" /> */}
           </div>
         </div>
-        <div className="mt-2 flex items-center bg-yellow-900 text-yellow-300 px-2 rounded-full">
-          <div className="relative w-[2vw] h-[3vw] min-w-[30px] min-h-[30px] mr-2">
+        <div className="flex items-center bg-yellow-900 text-yellow-300 px-4 rounded-full">
+          <div className="relative w-[2vw] h-[1vw] min-w-[30px] min-h-[30px] mr-2">
             <Image
               src="/coin.png"
               alt="coin"
