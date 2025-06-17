@@ -16338,10 +16338,12 @@ const Footer = () => {
         </Carousel>
         <div className="flex justify-evenly w-[30%] h-[95%]">
           <button
-            className="w-[50%] h-full "
-            onClick={() => handleModalOpen("MODIFY PASSWORD")}
+            className="w-[30%] h-full "
+            // onClick={() => handleModalOpen("MODIFY PASSWORD")}
           >
-            <svg
+
+            <img src="/wheel.png" alt="wheel image" srcset="" />
+            {/* <svg
               width="104"
               height="134"
               viewBox="0 0 104 134"
@@ -16422,7 +16424,7 @@ const Footer = () => {
                   <stop offset="1" stopColor="#189FF0" stopOpacity="0.9" />
                 </linearGradient>
               </defs>
-            </svg>
+            </svg> */}
           </button>
           <button
             className="w-[50%] h-full "
