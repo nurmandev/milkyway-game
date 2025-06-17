@@ -1,81 +1,39 @@
 "use server";
-import { config } from "./config";
 import data from "./data";
-import { getCookie } from "./utils";
 
+// Mock user data (you can replace this with any static info you want)
 export const getUser = async () => {
-  const token = await getCookie();
-
-  try {
-    const response = await fetch(`${config.server}/api/users/userData`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `userToken=${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Fetch failed:", error);
-  }
+  return {
+    id: "user_123",
+    name: "Demo User",
+    email: "demo@example.com",
+  };
 };
 
-// export const getGames = async (category: string) => {
-//   if (category === "all") {
-//     return data;
-//   }
-//   console.log("Categor : ", category);
-//   const filteredData = data.filter((game) => game.category === category);
-//   return filteredData;
-// };
-
+// Use local data and filter by category
 export const getGames = async (category: string) => {
-  const token = await getCookie();
-
-  try {
-    const response = await fetch(
-      `${config.server}/api/games/getGames?category=all`,
-      {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Cookie: `userToken=${token}`,
-        },
-      }
-    );
-
-    const data = await response.json();
-    console.log("Games : ", data);
-
+  if (category === "all") {
     return data;
-  } catch (error) {}
+  }
+  const filteredData = data.filter((game) => game.category === category);
+  return filteredData;
 };
 
+// Find game by ID from local data
 export const getGameById = async (gameId: string) => {
-  console.log("Searching for  : ", gameId);
+  const game = data.find(
+    (item) => item.gameName.toLowerCase() === gameId.toLowerCase()
+  );
 
-  try {
-    const game = data.find(
-      (item) => item.gameName.toLowerCase() === gameId.toLowerCase()
-    );
-    console.log("Found : ", game);
-
-    if (!game || game === undefined) {
-      throw new Error("No Game Found");
-    }
-    return { game: game, status: 200 };
-  } catch (error) {
+  if (!game) {
     return {
       game: null,
       status: 500,
     };
   }
+
+  return {
+    game,
+    status: 200,
+  };
 };
