@@ -3,17 +3,30 @@
 const FullScreenButton = () => {
   const fullScreenHandler = () => {
     const doc: any = document;
+    const elem: any = document.documentElement;
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    // iOS does not support requestFullscreen for non-video elements
+    if (isIOS) {
+      // Simulate fullscreen using CSS (customize this as needed)
+      const app = document.getElementById("app-fullscreen");
+      if (app) {
+        app.classList.toggle("ios-fullscreen");
+      }
+      return;
+    }
+
     if (
       !document.fullscreenElement &&
       !doc.webkitFullscreenElement &&
       !doc.msFullscreenElement
     ) {
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-      } else if (doc.documentElement.webkitRequestFullscreen) {
-        doc.documentElement.webkitRequestFullscreen();
-      } else if (doc.documentElement.msRequestFullscreen) {
-        doc.documentElement.msRequestFullscreen();
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
       }
     } else {
       if (document.exitFullscreen) {
@@ -25,6 +38,7 @@ const FullScreenButton = () => {
       }
     }
   };
+
   return (
     <button className=" w-[4vw] h-[4vw]" onClick={fullScreenHandler}>
       <svg
