@@ -1,17 +1,45 @@
 "use client";
+import { useEffect, useState } from "react";
 
 const FullScreenButton = () => {
+  const [isIOS, setIsIOS] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  useEffect(() => {
+    setIsIOS(/iPhone|iPad|iPod/i.test(navigator.userAgent));
+
+    // Track full screen changes
+    const onFullScreenChange = () => {
+      setIsFullScreen(
+        !!document.fullscreenElement ||
+          !!(document as any).webkitFullscreenElement ||
+          !!(document as any).msFullscreenElement
+      );
+    };
+
+    document.addEventListener("fullscreenchange", onFullScreenChange);
+    document.addEventListener("webkitfullscreenchange", onFullScreenChange);
+    document.addEventListener("msfullscreenchange", onFullScreenChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", onFullScreenChange);
+      document.removeEventListener(
+        "webkitfullscreenchange",
+        onFullScreenChange
+      );
+      document.removeEventListener("msfullscreenchange", onFullScreenChange);
+    };
+  }, []);
+
   const fullScreenHandler = () => {
     const doc: any = document;
     const elem: any = document.documentElement;
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    // iOS does not support requestFullscreen for non-video elements
     if (isIOS) {
-      // Simulate fullscreen using CSS (customize this as needed)
       const app = document.getElementById("app-fullscreen");
       if (app) {
         app.classList.toggle("ios-fullscreen");
+        setIsFullScreen(!isFullScreen);
       }
       return;
     }
