@@ -1735,7 +1735,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`absolute bottom-0 left-[1.8%] z-[10] w-[4.5vw] py-[3vh] flex justify-between items-center flex-col ${
+      className={` hidden md:flex absolute bottom-0 left-[1.8%] z-[10] w-[4.5vw] py-[3vh] justify-between items-center flex-col ${
         open ? "h-full" : "h-auto"
       } touch-manipulation`}
       style={{
