@@ -93,6 +93,26 @@ const Carousel = React.forwardRef(
       };
     }, [api, onSelect]);
 
+    // ✅ Fix for iPhone overflow/touch issues
+    React.useEffect(() => {
+      const isIOS =
+        typeof window !== "undefined" &&
+        /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+        !window.MSStream;
+
+      if (isIOS) {
+        document.body.style.webkitOverflowScrolling = "touch";
+        document.body.style.overscrollBehaviorY = "contain";
+      }
+
+      return () => {
+        if (isIOS) {
+          document.body.style.webkitOverflowScrolling = "";
+          document.body.style.overscrollBehaviorY = "";
+        }
+      };
+    }, []);
+
     return (
       <CarouselContext.Provider
         value={{

@@ -31,6 +31,26 @@ const GamesGrid = ({ data }) => {
     console.log("Is Game Loaded : ", gameLoaded);
   }, [gameLoaded]);
 
+  // ✅ Fixes for iOS Safari layout bugs (no visual changes)
+  useEffect(() => {
+    const isIOS =
+      typeof window !== "undefined" &&
+      /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+      !window.MSStream;
+
+    if (isIOS) {
+      document.body.style.webkitOverflowScrolling = "touch";
+      document.body.style.overscrollBehaviorY = "contain";
+    }
+
+    return () => {
+      if (isIOS) {
+        document.body.style.webkitOverflowScrolling = "";
+        document.body.style.overscrollBehaviorY = "";
+      }
+    };
+  }, []);
+
   return (
     <>
       {unfeaturedGames.length > 0 ? (
@@ -50,7 +70,7 @@ const GamesGrid = ({ data }) => {
                   {featuredGames.length > 0 && (
                     <FeaturedGameCard data={featuredGames[0]} />
                   )}
-                  <div className="grid grid-cols-3 gap-[2vw] w-[65%] py-[3%]">
+                  <div className="grid grid-cols-3 gap-[2vw] w-[65%] lg:h-[70vh] py-[3%]">
                     {chunk.map((game, index) => (
                       <GameCard
                         key={index}
@@ -64,7 +84,7 @@ const GamesGrid = ({ data }) => {
                 </CarouselItem>
               ) : (
                 <CarouselItem>
-                  <div className="grid grid-cols-4 gap-[2vw] w-[85%] py-[3%] m-auto">
+                  <div className="grid grid-cols-4 gap-[2vw] w-[85%] lg:h-[5vh] py-[3%] m-auto">
                     {chunk.map((game, index) => (
                       <GameCard key={index} src={game} type={game.type} />
                     ))}

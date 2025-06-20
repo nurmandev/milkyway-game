@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import FullScreenButton from "./ui/FullScreenButton";
@@ -7,35 +9,33 @@ import AvatarBorder from "./svgs/AvatarBorder";
 
 const Header = ({ user }) => {
   return (
-    <header className="relative flex items-center justify-center">
-      <div className=" absolute top-[45%] left-[4%] flex gap-4">
-        <div className=" user">
-          <div className="avatar w-[4vw] h-[4vw] rounded-full relative flex items-center justify-center">
-            <AvatarBorder className=" w-full h-full  absolute top-0 left-0 z-[1]" />
-            <div className="relative  w-[90%] h-[90%] ">
+    <header className="relative pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] flex items-center justify-center">
+      {/* Left Avatar & Coin */}
+      <div className="absolute top-1/2 left-4 sm:left-6 transform -translate-y-1/2 flex items-center gap-4">
+        <div className="user">
+          <div className="avatar relative rounded-full flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14">
+            <AvatarBorder className="w-full h-full absolute top-0 left-0 z-[1]" />
+            <div className="relative w-[85%] h-[85%] z-[2] overflow-hidden rounded-full">
               <Image
-                src={"/avatar.png"}
-                alt={user?.username}
+                src="/avatar.png"
+                alt={user?.username || "User Avatar"}
                 fill
-                objectFit="cover"
+                className="object-cover"
               />
             </div>
-            {/* <Connector className=" w-[60%] h-auto absolute -bottom-[.5vw] left-1/2 transform -translate-x-1/2 z-[2]" /> */}
+            {/* <Connector className="w-[60%] absolute -bottom-1 left-1/2 transform -translate-x-1/2 z-[2]" /> */}
           </div>
         </div>
-        <div className="flex items-center bg-yellow-900 text-yellow-300 px-4 rounded-full">
-          <div className="relative w-[2vw] h-[1vw] min-w-[30px] min-h-[30px] mr-2">
-            <Image
-              src="/coin.png"
-              alt="coin"
-              fill
-              className="w-full h-full object-contain"
-            />
+
+        <div className="flex items-center bg-yellow-900 text-yellow-300 px-3 py-1 rounded-full">
+          <div className="relative w-6 h-6 mr-2">
+            <Image src="/coin.png" alt="coin" fill className="object-contain" />
           </div>
-          <span className="text-xl font-semibold">1265.55</span>
+          <span className="text-sm sm:text-base font-semibold">1265.55</span>
         </div>
       </div>
 
+      {/* Background SVG */}
       <svg
         width="1920"
         height="110"
@@ -533,22 +533,26 @@ const Header = ({ user }) => {
           </linearGradient>
         </defs>
       </svg>
+      {/* Star Animation */}
       <Image
         src="/star-animation.gif"
-        className="absolute top-0 left-auto h-[80%] w-auto"
+        alt="Star Animation"
         height={400}
         width={400}
-        alt="logo"
-      />
-      <Image
-        src="/logo.png"
-        className="absolute top-0 left-auto h-full w-auto"
-        height={400}
-        width={400}
-        alt="logo"
+        className="absolute top-0 right-[12%] h-[60px] sm:h-[80px] w-auto z-[1]"
       />
 
-      <div className=" absolute top-[45%] right-[4%] flex gap-4">
+      {/* Logo */}
+      <Image
+        src="/logo.png"
+        alt="Logo"
+        height={400}
+        width={400}
+        className="absolute top-0 left-auto h-full w-auto z-[1]"
+      />
+
+      {/* Fullscreen & Logout */}
+      <div className="absolute top-1/2 right-4 sm:right-6 transform -translate-y-1/2 flex gap-3 sm:gap-4">
         <FullScreenButton />
         <LogoutButton />
       </div>

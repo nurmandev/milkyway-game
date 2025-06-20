@@ -4,18 +4,19 @@ import FavButton from "./ui/FavButton";
 
 const GameCard = ({ src, type, setCurrentGame, setIsModalOpen }) => {
   const gameOpenHandler = () => {
-    setCurrentGame(src?.gameHostLink);
-    setIsModalOpen(true);
+    setCurrentGame?.(src?.gameHostLink);
+    setIsModalOpen?.(true);
   };
 
   return (
     <>
       <div
-        className="w-full h-[27vw] sm:h-[14.5vw] gamecard relative z-[2]"
+        className="w-full h-[20vw] sm:h-[12.5vw] gamecard relative z-[2] cursor-pointer touch-manipulation"
         onClick={gameOpenHandler}
+        onTouchStart={() => {}}
       >
         <FavButton />
-        <div className=" w-full h-full relative">
+        <div className="w-full h-full relative">
           <Image
             src={src.gameThumbnailUrl}
             objectFit="cover"
@@ -25,7 +26,9 @@ const GameCard = ({ src, type, setCurrentGame, setIsModalOpen }) => {
           />
           {type ? (
             <div className="absolute top-0 left-0 z-50 w-[30%] flex items-center justify-center">
+              {/* SVG stays unchanged */}
               {type === "new" ? (
+                // ... your first SVG here
                 <svg
                   width="132"
                   height="78"
@@ -99,6 +102,7 @@ const GameCard = ({ src, type, setCurrentGame, setIsModalOpen }) => {
                   </defs>
                 </svg>
               ) : (
+                // ... your second SVG here
                 <svg
                   width="132"
                   height="78"

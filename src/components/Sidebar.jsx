@@ -1735,28 +1735,33 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`absolute bottom-0 left-[1.8%] z-[10] w-[4.5%] py-[3%] flex justify-between items-center flex-col ${
-        open ? "h-full" : " h-fit"
-      } `}
+      className={`absolute bottom-0 left-[1.8%] z-[10] w-[4.5vw] py-[3vh] flex justify-between items-center flex-col ${
+        open ? "h-full" : "h-auto"
+      } touch-manipulation`}
+      style={{
+        WebkitTransform: "translateZ(0)",
+        transform: "translateZ(0)",
+        WebkitOverflowScrolling: "touch",
+      }}
     >
       {open && (
-        <div className="p-[5%] bg-gradient-to-r from-[#53EFF1] via-[#3786FA] to-[#12C7F5] rounded-[5px]">
-          <div className="flex gap-1 flex-col p-[4%] rounded-[5px] bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900">
-            {menu.map((ele, index) => {
-              return (
-                <div key={index} onClick={() => handleCategory(ele.name)}>
-                  {selectedOption === ele.name ? ele?.selectedIcon : ele.icon}
-                </div>
-              );
-            })}
+        <div className="p-[5px] bg-gradient-to-r from-[#53EFF1] via-[#3786FA] to-[#12C7F5] rounded-[5px]">
+          <div className="flex gap-1 flex-col p-2 rounded-[5px] bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900">
+            {menu.map((ele, index) => (
+              <div key={index} onClick={() => handleCategory(ele.name)}>
+                {selectedOption === ele.name ? ele?.selectedIcon : ele.icon}
+              </div>
+            ))}
           </div>
         </div>
       )}
       <div
-        className={
-          open ? "rotate-45 transition-all h-fit" : "transition-all h-fit"
-        }
+        className={`transition-all ${open ? "rotate-45" : ""} h-auto`}
         onClick={() => setOpen((prev) => !prev)}
+        style={{
+          touchAction: "manipulation",
+          WebkitTapHighlightColor: "transparent",
+        }}
       >
         {open ? (
           <svg

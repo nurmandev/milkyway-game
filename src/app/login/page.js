@@ -53,8 +53,10 @@ const Login = () => {
 
     setLoading(false);
   };
+
+  
   return (
-    <div className="relative w-full flex justify-evenly">
+    <div className="relative _-rotate-90 sm:rotate-0 w-full h-full min-h-screen flex flex-col-reverse md:flex-row items-center justify-center bg-black p-4">
       <Image
         src="/login.png"
         alt="login-bg"
@@ -66,7 +68,7 @@ const Login = () => {
       />
       <form
         onSubmit={handleSubmit}
-        className="z-[2] p-[3%] flex justify-center flex-col gap-[5vw] sm:gap-[3vw] w-[35%] h-[50%] m-auto"
+        className="z-10 w-full max-w-sm sm:w-[90%] bg-white/10 rounded-xl p-6 flex flex-col gap-6 m-4"
       >
         <div className="bg-gradient-to-b from-[#fff] from-[0%] via-[#a8d4f8] via-[50.72%] to-[#4b97ff] h-[20%] p-[0.5%] rounded-[1vw]">
           <div className="w-[100%] p-[4%] bg-gradient-to-b from-[#0e052d] to-[#2b3953] rouned-[1vw] h-[100%] rounded-[1vw]">
@@ -116,7 +118,7 @@ const Login = () => {
           alt="login-character"
           fill
           objectFit="cover"
-          className="z-[2]"
+          className="object-contain z-10"
         />
       </div>
     </div>
