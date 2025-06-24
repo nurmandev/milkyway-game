@@ -8,7 +8,7 @@ import Image from "next/image";
 export default async function RootLayout({ children }) {
   const currentUser = await getUser();
   return (
-    <main className="relative w-full overflow-hidden">
+    <main className="relative w-full h-full flex flex-col  overflow-hidden">
       <div className="wave-bg w-full h-full absolute top-0 left-0"></div>
       <Image
         src={"/bg1.png"}
@@ -23,7 +23,7 @@ export default async function RootLayout({ children }) {
       <Header user={currentUser} />
       {children}
       <Footer />
-      <AudioPlayer />
+      {/* <AudioPlayer /> */}
     </main>
   );
 }
