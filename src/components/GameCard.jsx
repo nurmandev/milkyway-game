@@ -11,7 +11,7 @@ const GameCard = ({ src, type, setCurrentGame, setIsModalOpen }) => {
   return (
     <>
       <div
-        className="w-full h-[20vw] sm:h-[12.5vw] gamecard relative z-[2] cursor-pointer touch-manipulation"
+        className="w-full h-[28vw] sm:h-[12.5vw] gamecard relative z-[2] cursor-pointer touch-manipulation"
         onClick={gameOpenHandler}
         onTouchStart={() => {}}
       >
